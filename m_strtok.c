@@ -23,6 +23,7 @@ char *strtok(char *str1, const char *str2) {
 	static char *tmp2 = NULL;
 	static int strlen = 0;
 
+	
 	if (str1 != NULL) {
 	    tmp2 = str1;
 	    while( str1[strlen] != 0) {
@@ -40,7 +41,7 @@ char *strtok(char *str1, const char *str2) {
 	if (str1 == NULL) {
 		for(int i = num; i < strlen; i ++) {
 			if (i == strlen-1) {
-				return NULL;
+				return tmp2;
 			}
 			else if(tmp[i] != *str2) {
 				
@@ -59,20 +60,24 @@ char *strtok(char *str1, const char *str2) {
 			if (tmp[i] != *str2) {
 				num ++;
 			}
+			else if (tmp[i] == '\0') {
+				return tmp2;
+			}
 			else {
 				tmp[i] = '\0';
-				if ( i == strlen-1) {
-					return NULL;
-				}
-				else {
 				    tmp2 = tmp + i + 1;
 			    	break;
-				}
+			
 			}
 		}
 	}
 	printf("test 3 : %s\n", tmp2);// test3
 	printf("test 4 :%s\n", tmp);//test4
-
-	return tmp;
+	if ( num != strlen-1) {
+	    return tmp;
+	}
+    else {
+		return NULL;
+	}
+	return NULL;
 }
